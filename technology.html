@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Our custom CSS -->
+    <link rel="stylesheet" href="./Resets/resets.css">
+    <title>Space tourism website</title>
+
+    <script src="index.js" defer></script>
+    <script src="tabs.js" defer></script>
+</head>
+<body class="technology">
+<a class="skip-to-content" href="#main">Skip to Content</a>
+<header class="primary-header flex">
+    <div>
+        <img src="./assets/shared/logo.svg" alt="space tourism logo" class="logo">
+    </div>
+    <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false"><span class="sr-only">Menu</span></button>
+    <!--    Aria expanded toggles the visibility of an object and here it is set to false as the menu is closed in default state and when we push on the button the menu opens up with a bit of Js code.-->
+    <!--    below in navigation we have an id primary navigation because, -->
+    <!--    ere the aria-controls in defined as primary navigation so when we click on the menu it will control the nav bar.-->
+    <nav>
+        <ul id="primary-navigation" data-visible="false" class=" primary-navigation underline-indicators flex">
+            <!--                Initializing data visible here as false for scripting menu open and close-->
+            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="index.html"><span aria-hidden="true">00 </span>Home</a> </li>
+            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="destination.html"><span aria-hidden="true">01 </span>Destination</a> </li>
+            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="crew.html"><span aria-hidden="true">02 </span>Crew</a> </li>
+            <li class="active"><a class="ff-sans-cond uppercase text-white letter-spacing-2 " href="technology.html"><span aria-hidden="true">03 </span>Technology</a> </li>
+            <!--            Aria Hidden allows us to keep the content on the page and allows us to hide it from screen readers so that it doesnt pose to be a problem.-->
+        </ul>
+    </nav>
+    <!-- my ::after is here -->
+</header>
+
+
+
+<h1 class="ff-sans-cond uppercase letter-spacing-2 flex" style="justify-content: center; margin-top: 2rem">This page is under construction</h1>
+</body>
+</html>

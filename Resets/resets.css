@@ -1,0 +1,808 @@
+    /* ------------------- */
+/* Custom properties   */
+/* ------------------- */
+
+:root{
+    --clr-dark: 230 35% 7%;
+    --clr-light: 231 77% 90%;
+    --clr-white: 0 0% 100%;
+
+    /* font-sizes */
+    --fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
+    --fs-800: 3.5rem;
+    --fs-700: 1.5rem;
+    --fs-600: 1rem;
+    --fs-500: 1rem;
+    --fs-400: 0.9375rem;
+    --fs-300: 1rem;
+    --fs-200: 0.875rem;
+
+
+    /* font-families */
+    --ff-serif: "Bellefair", serif;
+    --ff-sans-cond: "Barlow Condensed", sans-serif;
+    --ff-sans-normal: "Barlow", sans-serif;
+}
+
+@media (min-width: 35rem) {
+    :root{
+        --fs-800: 5rem;
+        --fs-700: 2.5rem;
+        --fs-600: 1.5rem;
+        --fs-400: 1rem;
+    }
+}
+
+
+
+@media (min-width: 45rem) { /*Largest Media Query*/
+    :root {
+        --fs-800: 6.25rem;
+        --fs-700: 3.5rem;
+        --fs-600: 2rem;
+        --fs-500: 1.25rem;
+        --fs-400: 1.125rem;
+
+    }
+}
+
+
+
+
+
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+
+/* https://piccalil.li/blog/a-modern-css-reset/ */
+
+/* Box sizing */
+/*
+The ::before selector inserts something before the content of each selected element(s).
+
+Use the content property to specify the content to insert.
+
+Use the ::after selector to insert something after the content.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    /*Include padding and border in the element's total width and height:*/
+}
+
+/* Reset margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-weight: 400;
+}
+
+/* set up the body */
+body {font-family: var(--ff-sans-normal);
+    font-size: var(--fs-400);
+    color: hsl( var(--clr-white) );
+    background-color: hsl( var(--clr-dark) );
+    line-height: 1.5;
+    min-height: 100vh; /*vh performs just like %, ex- 50vh means 50% of your entire screen*/
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    overflow-x: hidden; /* To avoid overflow of explore button transition when a mobile device is being used*/
+}
+
+/* make images easier to work with */
+img,
+picutre { /*makes sure images get smaller as the screen size reduces*/
+    max-width: 100%;
+    display: block;
+}
+/* make form elements easier to work with */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* ------------------- */
+/* Utility classes     */
+/* ------------------- */
+
+.flex {
+    display: flex;
+    gap: var(--gap, 1rem); /* --gap is a local custom property and the 1rem that we state can overwrite it*/
+}
+
+/*.flex.even-columns >*{*/
+/*    width:100%;*/
+/*}*/
+
+
+
+.grid {
+    display: grid;
+    gap: var(--gap, 1rem);
+}
+
+.d-block{
+    display: block;
+}
+
+.flow > *:is(:not(:first-child)) {  /* applies to everything other than the first child div; where and not are selectors*/
+    margin-top: var(--flow-space, 1rem);
+}
+
+.flow--space-small{
+    --flow-space: 0.5rem;
+}
+
+.container {
+    padding-inline: 2em; /*inline takes care of the left and right side*/
+    margin-inline: auto;
+    max-width: 80rem;
+}
+
+.sr-only { /*Screen Reader only for people using assistive touch and text with speech on*/
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; /* added line */
+    border: 0;
+}
+
+.skip-to-content{
+    position: absolute;
+    z-index: 9999;
+    background: hsl(var(--clr-white));
+    color: hsl(var(--clr-dark));
+    padding: 0.5em 1em;
+    margin-inline: auto;
+    transform: translateY(-100%); /*Vertically moves away from the screen*/
+}
+
+.skip-to-content:focus{
+    transform: translateY(0);
+    transition: transform 250ms ease-in;
+}
+
+/*.box{   challenge 1*/
+/*    background-color: antiquewhite;*/
+/*    padding: 3rem;*/
+/*}*/
+
+/* colors */
+
+.bg-dark { background-color: hsl(var(--clr-dark));}
+.bg-accent { background-color: hsl(var(--clr-light));}
+.bg-white {background-color: hsl(var(--clr-white));}
+
+.text-dark { color: hsl(var(--clr-dark));}
+.text-accent { color: hsl(var(--clr-light));}
+.text-white { color: hsl(var(--clr-white));}
+
+/*.example-component{  Challenge 2 */
+/*    background-color: hsl(var(--clr-light) / 0.2);   !*The /.2 gives 20% alpha value ie its transparency (0.1 is transparent and 1.0 is fully opaque *!*/
+/*}*/
+
+/* typography */
+
+.ff-serif { font-family: var(--ff-serif); }
+.ff-sans-cond { font-family: var(--ff-sans-cond); }
+.ff-sans-normal { font-family: var(--ff-sans-normal); }
+
+.letter-spacing-1 { letter-spacing: 4.75px; }
+.letter-spacing-2 { letter-spacing: 2.7px; }
+.letter-spacing-3 { letter-spacing: 2.35px; }
+
+.uppercase { text-transform: uppercase; }
+
+.fs-900 { font-size: var(--fs-900); }
+.fs-800 { font-size: var(--fs-800); }
+.fs-700 { font-size: var(--fs-700); }
+.fs-600 { font-size: var(--fs-600); }
+.fs-500 { font-size: var(--fs-500); }
+.fs-400 { font-size: var(--fs-400); }
+.fs-300 { font-size: var(--fs-300); }
+.fs-200 { font-size: var(--fs-200); }
+
+.fs-900,
+.fs-800,
+.fs-700,
+.fs-600 {
+    line-height: 1.1;
+}
+
+.numbered-title {
+    font-family: var(--ff-sans-cond);
+    font-size: var(--fs-500);
+    text-transform: uppercase;
+    letter-spacing: 4.72px; /* px is being used here to give a precise measurement */
+}
+
+.numbered-title span{ /* targeting the spans inside the component  in which it is defined*/
+    margin-right: 5rem;
+    font-weight: 700;
+    color: hsl( var(--clr-light) /0.25);
+}
+
+.large-button{
+    font-size: 2rem;
+    position: relative;
+    display: inline-grid;
+    padding: 0 2em;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.large-button::after{  /* To create a pseudo element after large button, ie to create the background for explore*/
+    content:'';
+    position: absolute;
+    z-index: -1;
+    /*The z-index property specifies the stack order of an element.*/
+    /*An element with greater stack order is always in front of an element with a lower stack order.*/
+    background-color: hsl( var(--clr-white) /0.15);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 500ms linear, transform 750ms ease-in-out;
+}
+
+.large-button:hover::after,
+.large-button:focus::after{
+    opacity: 1;
+    transform: scale(1.5); /*applies a 2D or 3D transformation to an element. This property allows you to rotate, scale, move, skew, etc., elements.*/
+}
+
+
+/* primary-header */
+
+.logo {
+    margin: 1.5rem clamp(1.5rem,5vw ,3.5rem); /* clamps a value between an upper and lower bound with a growth factor in the middle- clamp(MIN, VAL, MAX)
+    and the 1.5 rem outside of clamp is given so that it doesn't move up down when the screen size changes and only left and right when needed.*/
+
+}
+
+.primary-header{
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.primary-navigation{ /* Make sure to keep the default style above the media query so as to avoid media query being overwritten*/
+    --gap: clamp(1.5rem, 5vw, 3.5rem); /* Gap in between routes in nav bar*/
+    --underline-gap: 2rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background: hsl(var(--clr-dark) / 0.05); /* This setting is for firefox that doesn't support backdrop-filter and might pose a problem, hence the dark bg.*/
+    backdrop-filter: blur(1.5rem); /*To give glass morphism effect*/
+}
+
+.primary-navigation a{
+    text-decoration: none;
+}
+
+.primary-navigation a > span{
+    font-weight: 700;
+    margin-right: 0.5em;
+}
+
+
+@supports (backdrop-filter: blur(1.5rem)) { /* If your browser supports backdrop filter then these properties take place in effect
+                                            else the above code runs*/
+    .primary-navigation{
+        background: hsl(var(--clr-white) / 0.05);
+        backdrop-filter: blur(1.5rem); /*To give glass morphism effect*/
+    }
+}
+
+.mobile-nav-toggle{ /* Don't need to display the hamburger when we aren't in mobile devices*/
+    display: none;
+}
+
+@media (max-width: 35rem) { /* Using max width here as it is strictly for mobile devices alone*/
+    .primary-navigation{
+        --underline-gap: 0.5rem;
+        list-style: none;
+        padding: min(20rem, 15vh) 2rem; /* min of 20rem and 15vh on top ie
+        if the screen gets too small it goes for the smaller value and 2 on the right*/
+        margin: 0;
+        flex-direction: column;
+        position: fixed;
+        inset: 0 0 0 30%; /*  property to put something on top- Shorthand gap for top right bottom and left (how much gap to be initialized from the side*/
+        z-index: 100;
+        transform: translateX(100%); /* So that the menu moves a 100% away ie fully disappear away from the screen on the X-scale.*/
+    }
+
+    .primary-navigation[data-visible="true"]{ /* if the attribute data-visible is true then...*/
+        transform: translateX(0); /* This brings out the menu ie the menu moves 0% away aka show itself*/
+        transition: transform 550ms ease-in-out;
+    }
+
+    .primary-navigation[data-visible="false"]{
+        transition: transform 600ms ease-out;
+
+    }
+
+    .mobile-nav-toggle[aria-expanded="true"]{ /* To change hamburger icon to close icon*/
+        background-image: url(/assets/shared/icon-close.svg);
+    }
+
+    .primary-navigation.underline-indicators > .active{ /*Keeps the hover effect only on desktop machine when the screen is small but in a mobile it won't show.
+                                                        (To completely remove it replace .active with "*"*/
+        border: 0;
+    }
+    .mobile-nav-toggle{
+        display: block;
+        position: absolute;
+        z-index: 2000;
+        right: 1rem;
+        top: 2rem;
+        background: transparent; /* Dont need to display the hamburger when we menu is open*/
+        background-image: url("/assets/shared/icon-hamburger.svg");
+        background-repeat: no-repeat; /* To display repeat*/
+        background-position: center;
+        width: 1.5rem;
+        aspect-ratio: 1;
+        border: 0;
+    }
+
+    .mobile-nav-toggle:focus-visible{ /* This ensures that the button wont be highlighted or in normal terms it wont be focused once u finish clicking on it unless one uses the keyboard.*/
+        outline: 5px solid white;
+        outline-offset: 5px;
+    }
+
+}
+
+
+@media (min-width: 35em){
+    .primary-navigation{
+        padding-inline: clamp(3rem, 7vw, 7rem);
+    }
+}
+
+@media (min-width: 35em) and (max-width: 44.999em) { /* To make some changes when the screen goes to tablet size*/
+    .primary-navigation a > span{
+        display: none; /* To take out numbers display from nav bar when screen size goes to tablet size*/
+    }
+}
+
+
+@media (min-width: 45em) {
+    .primary-header::after{
+        content: '';
+        display: block;
+        position: relative;
+        height: 1px;
+        width: 35%;
+        margin-right: -2.5rem;
+        background: hsl(var(--clr-white) / 0.25);
+        order: 1; /*specifies the order of a flexible item relative to the rest of the flexible items inside the same container.*/
+    }
+
+    nav{
+        order: 2;
+    }
+
+    .primary-navigation{
+        margin-block: 2rem;
+    }
+}
+
+
+.underline-indicators > * {  /* To select all the descendants rather than defining in each li*/
+    padding: var(--underline-gap, 0.5rem) 0; /* padding of 1rem on the top and the bottom and 0 on right and left*/
+    border: 0;
+    cursor: pointer;
+    border-bottom: .2rem solid hsl( var(--clr-white) /0);
+    background-color: transparent;
+}
+
+.underline-indicators > button:hover,
+.underline-indicators > button:focus,
+.underline-indicators > li:hover,
+.underline-indicators > li:focus{
+    border-color: hsl(var(--clr-white) / 0.5);
+}
+
+@media (min-width: 35rem) {
+    .underline-indicators > .active,
+    .underline-indicators > [aria-selected="true"] /*[] is used for selecting attributes: so anything with aria selected set to true will get affected*/
+    {
+        color: hsl(var(--clr-white) / 1);
+        border-color: hsl(var(--clr-white) / 1);
+    }
+}
+
+
+
+.tab-list{
+    --gap: 2rem;
+}
+
+.dot-indicators > *{
+    cursor: pointer;
+    border: 0;
+    border-radius: 50%;
+    padding: 0.5em;
+    background-color: hsl(var(--clr-white) / 0.25);
+}
+
+.dot-indicators > button:hover,
+.dot-indicators > button:focus{
+    background-color: hsl(var(--clr-white) / 0.5);
+
+}
+
+.dot-indicators > [aria-selected="true"] /*[] is used for selecting attributes: so anything with aria selected set to true will get affected*/
+{
+    background-color: hsl(var(--clr-white) / 1);
+}
+
+.number-indicators > *{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 0;
+    border-radius: 50%;
+    margin-top: 5rem;
+    padding: 1em;
+    background-color: hsl(var(--clr-white) / 0.25);
+}
+
+.number-indicators > button:hover,
+.number-indicators > button:focus{
+    background-color: hsl(var(--clr-white) /0.5);
+}
+
+.number-indicators > [aria-selected="true"] /*[] is used for selecting attributes: so anything with aria selected set to true will get affected*/
+{
+    background-color: hsl(var(--clr-white) / 1);
+}
+
+
+/* --------------------------- */
+/* Page specific background    */
+/* --------------------------- */
+
+.home{
+    background-size: cover; /* To disable repeating of image*/
+    background-position: bottom center; /* So that the image doesn't get cut because of the above property*/
+}
+
+/* home */
+
+.home{ /* By Default we're working with mobile device*/
+    background-image: url(/assets/home/background-home-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (min-width: 35rem) {
+    .home{
+        background-position: center center; /* So that the image doesn't come behind the text and make it unreadable*/
+        background-image: url(/assets/home/background-home-tablet.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media (min-width: 45rem) {
+    .home{
+        background-image: url(/assets/home/background-home-desktop.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+
+
+
+.destination{ /* By Default we're working with mobile device*/
+    background-image: url(/assets/destination/background-destination-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (min-width: 35rem) {
+    .destination{
+        background-position: center center; /* So that the image doesn't come behind the text and make it unreadable*/
+        background-image: url(/assets/destination/background-destination-tablet.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media (min-width: 45rem) {
+    .destination{
+        background-image: url(/assets/destination/background-destination-desktop.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+
+
+.crew{ /* By Default we're working with mobile device*/
+    background-image: url(/assets/crew/background-crew-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (min-width: 35rem) {
+    .crew{
+        background-position: center center; /* So that the image doesn't come behind the text and make it unreadable*/
+        background-image: url(/assets/crew/background-crew-tablet.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media (min-width: 45rem) {
+    .crew{
+        background-image: url(/assets/crew/background-crew-desktop.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+
+.technology{ /* By Default we're working with mobile device*/
+    background-image: url(/assets/technology/background-technology-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (min-width: 35rem) {
+    .technology{
+        background-position: center center; /* So that the image doesn't come behind the text and make it unreadable*/
+        background-image: url(/assets/technology/background-technology-tablet.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media (min-width: 45rem) {
+    .technology{
+        background-image: url(/assets/technology/background-technology-desktop.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+/* --------------------------- */
+/* Layout    */
+/* --------------------------- */
+
+/*Make a grid with 4 columns*/
+
+/*The grid-template-columns property defines the number of columns in your grid layout, and it can define the width of each column.*/
+/*The value is a space-separated-list, where each value defines the width of the respective column.*/
+/*If you want your grid layout to contain 4 columns, specify the width of the 4 columns, or "auto" if all columns should have the same width.*/
+
+.grid-container{
+    text-align: center;
+    display: grid;
+    padding-inline: 1rem; /* Won't let the text touch the screen on either size*/
+    /*row-gap: 10%;  Does the same as below*/
+    place-items: center; /* So this places the items in the center based on not only the width of the screen
+    but also the height of the screen so whenever the height of the screen reduces, it centers itself on top separately and on the bottom separately*/
+    /*column-gap: var(--container-gap, 2rem);*/
+    /*grid-template-columns: minmax(2rem, 1fr) minmax(0, 40rem) minmax(0, 40rem) minmax(2rem, 1fr); !* 2rem minimum space and maximum choice of length on the left and right side and we use minmax() in the middle two columns so as to avoid giving some hardwired measurement*!*/
+    padding-bottom: 4rem; 
+}
+
+.grid-container p:not([class]) { /*Any paragraph that doesn't have a class in it*/
+    max-width: 50ch; /* ch stands for characters; This is to limit the length of the sentence*/
+}
+
+.numbered-title{
+    grid-area: title; /*The grid-area property can also be used to assign a name to a grid item.
+                    Named grid items can then be referenced to by the grid-template-areas property(below) of the grid container*/
+}
+
+/* destination layout */
+
+.grid-container--destination{
+    --flow-space: 2rem;
+    grid-template-areas:    /*The grid-template-areas property specifies areas within the grid layout.*/
+            'title'
+            'image'
+            'tabs'
+            'content';
+}
+
+.grid-container--destination > picture{
+    grid-area: image;
+    max-width: 60%;
+    align-self: start;
+}
+
+.grid-container--destination >.tab-list{
+    grid-area: tabs;
+
+}
+
+.grid-container--destination >.destination-info{ /* Specifically for this page*/
+    grid-area: content;
+}
+
+.destination-meta{ /* The bottom part of the website*/
+    flex-direction: column;
+    border-top: 1px solid hsl(var(--clr-white) /0.1); /*To give a styling line*/
+    padding-top: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+.destination-meta p{
+    font-size: 1.75rem;
+}
+
+
+/* crew layout */
+
+
+.grid-container--crew{
+    --flow-space: 2rem;
+    grid-template-areas:
+        'title'
+        'image'
+        'tabs'
+        'content';
+}
+
+.grid-container--crew > picture{
+    grid-area: image;
+    max-width: 60%;
+}
+
+.grid-container--crew >.dot-indicators{
+    grid-area: tabs;
+}
+
+.grid-container--crew >.crew-details{ /* Specifically for this page*/
+    grid-area: content;
+}
+
+.crew-details h2{
+    opacity: .5;
+}
+
+
+@media (min-width: 35em) { /* For mobile devices*/
+    .numbered-title{
+        justify-self: start;
+        margin-top: 2rem;
+    }
+
+    .destination-meta{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .grid-container--crew{
+        padding-bottom: 0;
+        grid-template-areas:
+        'title'
+        'content'
+        'tabs'
+        'image';
+    }
+}
+
+
+
+
+
+
+@media (min-width: 45em) {  /* !!For the media query to take place in effect, the minimum width should be of 45 rem. We're mentioning 45 rem here because this is the threshold size after which everything starts going haywire on smaller devices like laptop*/
+    .grid-container{ /*setting up the grids for the website */
+        text-align: left;
+        column-gap: var(--container-gap, 2rem);
+        grid-template-columns: minmax(1rem, 1fr) repeat(2, minmax(0,30rem)) minmax(1rem, 1fr); /* 2rem minimum space and maximum choice of length on the left and right side
+                                                                                                            and we use minmax() in the middle two columns so as to avoid giving some hardwired measurement
+                                                                                                            Also the first and fourth measurements are the extremities where nothing should live and
+                                                                                                            middle measurements are where things should be contained.*/
+    }
+
+    .grid-container--home{
+        padding-bottom: max(6rem, 20vh); /*So here we're using max function so that it favors bigger screens, i.e,
+        the bigger value (here 20vh) gets applied so that it doesn't go completely to the bottom. (If screen gets smaller then it gets locked at 6rem*/
+        align-items: end;
+    }
+
+    .grid-container--home >*:first-child{
+        grid-column: 2;
+    }
+    /*So here we're trying to give spacing to the first and last columns sa that the middle two columns have spaces on both the edges of the page.*/
+
+    .grid-container--home >*:last-child{
+        grid-column: 3;
+    }
+
+    .grid-container--destination{
+        justify-items: start;
+        align-items: start; /*Keeps all the content together at the top without slowly stretching out as the page size increases.   */
+        grid-template-areas:    /*The grid-template-areas property specifies areas within the grid layout.*/
+                '. title title .'
+                '. image tabs .' /*Designed as per website layout*/
+                '. image content .';
+    } /* So here the dot and then the items names' dots are a reference to grid -template-columns (above) measurements
+        and the dots are nothing as they are in the extremities*/
+
+    .grid-container--crew{
+        grid-template-columns: minmax(1rem, 1fr) minmax(0, 39rem) minmax(0, 21rem) minmax(1rem, 1fr);
+        justify-items: start;
+        grid-template-areas:
+            '. title title .'
+            '. content image .'
+            '. tabs image .';
+    }
+
+    .grid-container--destination > picture {
+        max-width: 90%;
+    }
+
+    .destination-meta{
+        --gap: min(6vw, 6rem); /*Choose the smaller one ,i.e, if the screen gets bigger then 6rem gets applied
+         and when the screen gets smaller then 8 viewport width gets applied.*/
+        justify-content: start;
+    }
+
+
+    .grid-container--crew > picture{    /*To stick the image to the bottom always*/
+        grid-column: span 2; /* this allows the picture to break into the rightmost column that we kept empty up until now*/
+        align-self: end;
+        max-width: 80%;
+    }
+
+
+
+
+}
+
+
+/*body {*/
+/*    overflow: hidden; !* Hide scrollbars *!*/
+/*}*/
+
+
+html{
+    scrollbar-gutter: stable;
+}
