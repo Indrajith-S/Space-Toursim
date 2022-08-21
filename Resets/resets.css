@@ -525,7 +525,7 @@ select {
 
 @media (min-width: 45rem) {
     .home{
-        background-image: url(/assets/home/background-home-desktop.jpg);
+        background-image: url("/assets/home/background-home-desktop.jpg");
         background-size: cover;
         background-repeat: no-repeat;
     }
@@ -607,7 +607,7 @@ select {
 }
 
 /* --------------------------- */
-/* Layout    */
+/* Layout                       */
 /* --------------------------- */
 
 /*Make a grid with 4 columns*/
@@ -726,6 +726,57 @@ select {
     }
 }
 
+/* technology layout */
+
+.grid-container--technology{
+    grid-template-areas:
+        'title'
+        'image'
+        'tabs'
+        'content';
+}
+
+.grid-container--technology > picture{
+    grid-area: image;
+    background-color: lime;
+}
+
+.grid-container--technology >.number-indicators{
+    grid-area: tabs;
+}
+
+.grid-container--technology >.technology-details{ /* Specifically for this page*/
+    grid-area: content;
+}
+
+.technology-meta > p{
+    color: hsl(var(--clr-light));
+}
+
+@media (min-width: 35em) { /* For mobile devices*/
+    .numbered-title{
+        justify-self: start;
+        margin-top: 2rem;
+    }
+
+    .technology-meta{
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .grid-container--technology{
+        padding-bottom: 0;
+        grid-template-areas:
+    'title'
+    'image'
+    'tabs'
+    'content';
+    }
+}
+
+/*.technology-details h2{*/
+/*    opacity: .5;*/
+/*}*/
 
 
 
@@ -792,6 +843,19 @@ select {
         max-width: 80%;
     }
 
+    .grid-container--technology{
+        grid-template-columns: minmax(1rem, 1fr) minmax(0, 30rem) minmax(0, 30rem);
+        grid-template-areas:
+            '. title title .'
+            '. tabs content image';
+    }
+
+    .grid-container--technology >.number-indicators{
+        display: block;
+        aspect-ratio: 1;
+    }
+
+
 
 
 
@@ -803,6 +867,6 @@ select {
 /*}*/
 
 
-html{
-    scrollbar-gutter: stable;
-}
+/*html{*/
+/*    scrollbar-gutter: stable;*/
+/*}*/
