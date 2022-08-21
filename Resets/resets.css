@@ -535,7 +535,7 @@ select {
 
 
 .destination{ /* By Default we're working with mobile device*/
-    background-image: url(/assets/destination/background-destination-mobile.jpg);
+    background-image: url("/assets/destination/background-destination-mobile.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -543,7 +543,7 @@ select {
 @media (min-width: 35rem) {
     .destination{
         background-position: center center; /* So that the image doesn't come behind the text and make it unreadable*/
-        background-image: url(/assets/destination/background-destination-tablet.jpg);
+        background-image: url("/assets/destination/background-destination-tablet.jpg");
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -551,7 +551,7 @@ select {
 
 @media (min-width: 45rem) {
     .destination{
-        background-image: url(/assets/destination/background-destination-desktop.jpg);
+        background-image: url("/assets/destination/background-destination-desktop.jpg");
         background-size: cover;
         background-repeat: no-repeat;
     }
